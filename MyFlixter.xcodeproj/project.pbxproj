@@ -70,14 +70,38 @@
 		2E1049451E68E6A200118899 /* MyFlixter */ = {
 			isa = PBXGroup;
 			children = (
+				2ED82E581E68F56100BD98C2 /* View Controllers */,
+				2ED82E571E68F55800BD98C2 /* Views */,
+				2ED82E561E68F54C00BD98C2 /* Models */,
 				2E1049461E68E6A200118899 /* AppDelegate.swift */,
-				2E1049481E68E6A200118899 /* ViewController.swift */,
 				2E10494A1E68E6A200118899 /* Main.storyboard */,
 				2E10494D1E68E6A200118899 /* Assets.xcassets */,
 				2E10494F1E68E6A200118899 /* LaunchScreen.storyboard */,
 				2E1049521E68E6A200118899 /* Info.plist */,
 			);
 			path = MyFlixter;
+			sourceTree = "<group>";
+		};
+		2ED82E561E68F54C00BD98C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		2ED82E571E68F55800BD98C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2ED82E581E68F56100BD98C2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2E1049481E68E6A200118899 /* ViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		E432EB54C50D5C2BDDB7956B /* Frameworks */ = {

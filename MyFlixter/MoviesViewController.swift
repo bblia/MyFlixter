@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var nowPlaying:[NSDictionary]?
@@ -18,27 +19,26 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        let postData = NSData(data: "{}".data(using: String.Encoding.utf8)!)
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?region=US&page=1&language=en-US&api_key=ab19882283669e4716d0b7bf2c30f35e")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        request.httpMethod = "GET"
-        request.httpBody = postData as Data
+
+        let apiKey = "ab19882283669e4716d0b7bf2c30f35e"
+        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")!
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error ?? "UNKOWN ERROR")
-            } else {
-                if let responseDictionary = try! JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-                {
-                    self.nowPlaying = responseDictionary["results"]! as? [NSDictionary] ?? nil
-                    self.tableView.reloadData()
-                }
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        let task: URLSessionDataTask = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            if let error = error {
+                print(error)
+            } else if let data = data,
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
+                self.nowPlaying = dataDictionary["results"]! as? [NSDictionary] ?? nil
+                self.tableView.reloadData()
             }
-        })
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+        task.resume()
+
         
-        dataTask.resume()
     
     
     
@@ -46,19 +46,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+        let movie = Movie(dictionary: nowPlaying![indexPath.row])
         
-        let movie = nowPlaying![indexPath.row]
-        
-        cell.titleLabel.text = movie["title"] as? String
-        cell.overViewLabel.text = movie["overview"] as? String
+        cell.titleLabel.text = movie.title
+        cell.overViewLabel.text = movie.overView
+        cell.movieImageView.setImageWith(movie.moviePosterUrl!)
         cell.overViewLabel.sizeToFit()
-        let posterPath = movie["poster_path"] as? String
         
-        let baseUrl = "http://image.tmdb.org/t/p/w500"
-        
-        let imageURL = NSURL(string: baseUrl + posterPath!)
-        
-        cell.movieImageView.setImageWith(imageURL as! URL)
         return cell
     }
     

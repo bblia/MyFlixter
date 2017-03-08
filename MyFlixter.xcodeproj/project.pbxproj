@@ -12,6 +12,7 @@
 		2E10494C1E68E6A200118899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E10494A1E68E6A200118899 /* Main.storyboard */; };
 		2E10494E1E68E6A200118899 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E10494D1E68E6A200118899 /* Assets.xcassets */; };
 		2E1049511E68E6A200118899 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E10494F1E68E6A200118899 /* LaunchScreen.storyboard */; };
+		2E6E49801E7096E000E16E2F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6E497F1E7096E000E16E2F /* Movie.swift */; };
 		2EB5CDBE1E6B5E1000BABF16 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5CDBD1E6B5E1000BABF16 /* MovieCell.swift */; };
 		792213B7758CA04B05A3EF3E /* Pods_MyFlixter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720407A2A63CEBD14A7EA203 /* Pods_MyFlixter.framework */; };
 /* End PBXBuildFile section */
@@ -24,9 +25,11 @@
 		2E10494D1E68E6A200118899 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E1049501E68E6A200118899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E1049521E68E6A200118899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E6E497F1E7096E000E16E2F /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		2EB5CDBD1E6B5E1000BABF16 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		3BA7DC6595897BA7862DD8AB /* Pods-MyFlixter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlixter.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFlixter/Pods-MyFlixter.release.xcconfig"; sourceTree = "<group>"; };
 		720407A2A63CEBD14A7EA203 /* Pods_MyFlixter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MyFlixter.framework; path = "../../../../../../../../../Users/franciscodelgado/Library/Developer/Xcode/DerivedData/MyFlixter-btjdcjzmhomkxrakwzduebqwpclu/Build/Products/Debug-iphoneos/Pods_MyFlixter.framework"; sourceTree = SDKROOT; };
+		988673381E87D33A8E7BB2E8 /* Pods_MyFlixter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFlixter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5A5174478A831279DECFFB7 /* Pods-MyFlixter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFlixter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFlixter/Pods-MyFlixter.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +90,7 @@
 		2ED82E561E68F54C00BD98C2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2E6E497F1E7096E000E16E2F /* Movie.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -111,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				720407A2A63CEBD14A7EA203 /* Pods_MyFlixter.framework */,
+				988673381E87D33A8E7BB2E8 /* Pods_MyFlixter.framework */,
 			);
 			name = Frameworks;
 			path = ../../../../../../../../../Users/franciscodelgado/github/ios_apps/MyFlixter;
@@ -242,6 +247,7 @@
 			files = (
 				2E1049491E68E6A200118899 /* MoviesViewController.swift in Sources */,
 				2E1049471E68E6A200118899 /* AppDelegate.swift in Sources */,
+				2E6E49801E7096E000E16E2F /* Movie.swift in Sources */,
 				2EB5CDBE1E6B5E1000BABF16 /* MovieCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

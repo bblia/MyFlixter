@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class MovieCell: UITableViewCell {
     @IBOutlet weak var movieImageView: UIImageView!
@@ -23,5 +24,12 @@ class MovieCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    func setFields(_ movie: Movie){
+        titleLabel.text = movie.title
+        overViewLabel.text = movie.overView
+        movieImageView.setImageWith(NSURL(string: "https://image.tmdb.org/t/p/w342"+movie.moviePosterPath!) as! URL)
+        overViewLabel.sizeToFit()
+    }
 }
+
+

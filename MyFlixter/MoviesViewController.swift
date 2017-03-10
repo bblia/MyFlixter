@@ -11,8 +11,8 @@ import AFNetworking
 import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var nowPlaying:[NSDictionary]?
-    
+    var movies:[NSDictionary]?
+    var category:String!
     @IBOutlet weak var tableView: UITableView!
    
     override func viewDidLoad() {
@@ -21,8 +21,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
 
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        Movie.fetchMovies(movieCategory: "now_playing", successCallBack: { (movies) in
-            self.nowPlaying = movies["results"]! as? [NSDictionary] ?? nil
+        Movie.fetchMovies(movieCategory: category, successCallBack: { (movies) in
+            self.movies = movies["results"]! as? [NSDictionary] ?? nil
             self.tableView.reloadData()
             MBProgressHUD.hide(for: self.view, animated: true)
         }) { (error) in
@@ -33,7 +33,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        let movie = Movie(nowPlaying![indexPath.row])
+        let movie = Movie(movies![indexPath.row])
         
         cell.setFields(movie)
         
@@ -41,7 +41,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let nowPlaying = nowPlaying {
+        if let nowPlaying = movies {
             return nowPlaying.count
         }else{
             return 0
@@ -56,7 +56,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
         let indexPath = tableView.indexPath(for: cell)
-        let movie = Movie(nowPlaying![indexPath!.row])
+        let movie = Movie(movies![indexPath!.row])
         
         let detailViewController = segue.destination as! DetailsMovieViewController
         detailViewController.movie = movie

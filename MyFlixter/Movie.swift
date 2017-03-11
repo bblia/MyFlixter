@@ -12,7 +12,6 @@ class Movie: NSObject {
     var title:String?
     var overView:String? 
     var moviePosterPath:String?
-    static let lowResURL = "https://image.tmdb.org/t/p/w45"
     static let highResURL = "https://image.tmdb.org/t/p/original"
     
     init(_ dictionary:NSDictionary){

@@ -29,7 +29,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             print(error ?? "error")
         }
     }
-
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
@@ -54,12 +53,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
+        let cell = sender as! MovieCell
         let indexPath = tableView.indexPath(for: cell)
         let movie = Movie(movies![indexPath!.row])
         
         let detailViewController = segue.destination as! DetailsMovieViewController
         detailViewController.movie = movie
+        detailViewController.lowResImage = cell.movieImageView.image
     }
     
 }

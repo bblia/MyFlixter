@@ -21,9 +21,8 @@ class MovieCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
     func setFields(_ movie: Movie){
         titleLabel.text = movie.title
         overViewLabel.text = movie.overView

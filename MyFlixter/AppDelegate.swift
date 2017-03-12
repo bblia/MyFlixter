@@ -18,27 +18,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
 
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UINavigationBar.appearance().backgroundColor = UIColor.white
+        UINavigationBar.appearance().barTintColor = UIColor.red
+        UINavigationBar.appearance().tintColor = UIColor.white
+        
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         
         let nowPlayingNavController = storyBoard.instantiateViewController(withIdentifier: "MoviesNavigationController") as! UINavigationController
-    
         let nowPlayingViewController = nowPlayingNavController.topViewController as! MoviesViewController
+        
         nowPlayingViewController.category = "now_playing"
     
-        nowPlayingNavController.tabBarItem.title = "Now Playing"
+
+        
         
         let topRatedNavController = storyBoard.instantiateViewController(withIdentifier: "MoviesNavigationController") as! UINavigationController
         let topRatedViewController = topRatedNavController.topViewController as! MoviesViewController
+        
         topRatedViewController.category = "top_rated"
         
         
+        nowPlayingNavController.tabBarItem.title = "Now Playing"
+        nowPlayingNavController.tabBarItem.image = UIImage(named:"iconmonstr-video-camera-9-32")
+        
         topRatedNavController.tabBarItem.title = "Top Rated"
+        topRatedNavController.tabBarItem.image = UIImage(named: "iconmonstr-thumb-18-32")
+        
+
+        
+        
         let tabBarController = UITabBarController()
         
         tabBarController.viewControllers = [nowPlayingNavController,topRatedNavController]
         
-        
+//        tabBarController.tabBar.backgroundColor = UIColor.white
+        tabBarController.tabBar.tintColor = UIColor.red
         
         window?.rootViewController = tabBarController
         

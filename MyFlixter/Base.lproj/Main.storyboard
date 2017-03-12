@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Movies View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesViewController" customModule="MyFlixter" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,18 +37,19 @@
                                                     <rect key="frame" x="142" y="8" width="273" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CPT-sx-zIK">
                                                     <rect key="frame" x="142" y="28" width="239" height="13"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="movieImageView" destination="vy9-yU-vab" id="fqx-hk-Cfi"/>
                                             <outlet property="overViewLabel" destination="CPT-sx-zIK" id="s32-OB-sZf"/>
@@ -58,10 +59,56 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="w4O-u0-u8R">
+                                <rect key="frame" x="0.0" y="62" width="414" height="674"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YEJ-Iq-hdT">
+                                    <size key="itemSize" width="130" height="200"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="8Gh-LY-cnb" customClass="MovieCollectionCell" customModule="MyFlixter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="130" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1fs-0U-0VM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="200"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="moviePoster" destination="1fs-0U-0VM" id="4Dk-h3-AXX"/>
+                                            <segue destination="Rru-v7-MH0" kind="push" id="Vly-Lf-kVE"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="Uvn-Vl-Tu9"/>
+                    <navigationItem key="navigationItem" id="Uvn-Vl-Tu9">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="aHD-Ar-mlL">
+                            <rect key="frame" x="125" y="8" width="165" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="List"/>
+                                <segment title="Grid"/>
+                            </segments>
+                            <connections>
+                                <action selector="displayChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="ZGd-Jd-aW8"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
+                        <outlet property="myCollectionView" destination="w4O-u0-u8R" id="oTv-yk-jNm"/>
+                        <outlet property="mySegmentControl" destination="aHD-Ar-mlL" id="DjK-mW-X5t"/>
                         <outlet property="tableView" destination="p9L-ei-reX" id="hda-73-GRf"/>
                     </connections>
                 </viewController>
@@ -148,4 +195,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina5_5.fullscreen"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="hA5-jY-uOm"/>
+    </inferredMetricsTieBreakers>
 </document>

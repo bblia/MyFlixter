@@ -7,19 +7,23 @@
 //
 
 import UIKit
-
+import Foundation
 class Movie: NSObject {
     var title:String?
     var overView:String? 
     var moviePosterPath:String?
+    var rating:Double?
+    
     static let highResURL = "https://image.tmdb.org/t/p/original"
     
     init(_ dictionary:NSDictionary){
         self.title = dictionary["title"] as? String
         self.overView = dictionary["overview"] as? String
         self.moviePosterPath = dictionary["poster_path"] as? String
+        self.rating = dictionary["vote_average"] as? Double
     }
-    //factory method
+    
+    //request movie array
     class func fetchMovies(movieCategory: String,successCallBack: @escaping (NSDictionary) -> (), errorCallBack: ((Error?) -> ())?) {
         let apiKey = "ab19882283669e4716d0b7bf2c30f35e"
         let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieCategory)?api_key=\(apiKey)")!

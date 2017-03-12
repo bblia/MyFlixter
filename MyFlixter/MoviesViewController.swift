@@ -65,7 +65,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         let movie = Movie(movies![indexPath.row])
-        
+        cell.selectionStyle = .none
         cell.setFields(movie)
         
         return cell

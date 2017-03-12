@@ -52,8 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = UITabBarController()
         
         tabBarController.viewControllers = [nowPlayingNavController,topRatedNavController]
-        
-//        tabBarController.tabBar.backgroundColor = UIColor.white
         tabBarController.tabBar.tintColor = UIColor.red
         
         window?.rootViewController = tabBarController

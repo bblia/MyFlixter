@@ -59,25 +59,25 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="w4O-u0-u8R">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" misplaced="YES" dataMode="prototypes" id="w4O-u0-u8R">
                                 <rect key="frame" x="0.0" y="62" width="414" height="674"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YEJ-Iq-hdT">
-                                    <size key="itemSize" width="130" height="200"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="YEJ-Iq-hdT">
+                                    <size key="itemSize" width="138" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="8Gh-LY-cnb" customClass="MovieCollectionCell" customModule="MyFlixter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="130" height="200"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="collectionCell" id="8Gh-LY-cnb" customClass="MovieCollectionCell" customModule="MyFlixter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="138" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="130" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="138" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1fs-0U-0VM">
-                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="200"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="1fs-0U-0VM">
+                                                    <rect key="frame" x="0.0" y="0.0" width="138" height="200"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -196,6 +196,6 @@
         <simulatedScreenMetrics key="destination" type="retina5_5.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="hA5-jY-uOm"/>
+        <segue reference="Vly-Lf-kVE"/>
     </inferredMetricsTieBreakers>
 </document>

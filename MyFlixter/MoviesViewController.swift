@@ -11,6 +11,7 @@ import AFNetworking
 import MBProgressHUD
 
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource,UICollectionViewDelegate {
+    @IBOutlet weak var networkErrorLabel: UILabel!
     
     @IBOutlet weak var mySegmentControl: UISegmentedControl!
     @IBOutlet weak var myCollectionView: UICollectionView!
@@ -19,9 +20,13 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     var listrefreshControl = UIRefreshControl()
     var gridrefreshControl = UIRefreshControl()
-   
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        networkErrorLabel.isHidden = true
+        
         //refresh controls
         listrefreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         gridrefreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
@@ -52,6 +57,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             MBProgressHUD.hide(for: self.view, animated: true)
         }) { (error) in
             print(error ?? "error")
+            self.networkErrorLabel.isHidden = false
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
     }
     //list set up.
@@ -149,10 +156,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             self.movies = movies["results"]! as? [NSDictionary] ?? nil
             self.tableView.reloadData()
             self.myCollectionView.reloadData()
-            refreshControl.endRefreshing()
+            self.networkErrorLabel.isHidden = true
         }) { (error) in
-            print(error ?? "error")
+            self.networkErrorLabel.isHidden = false
+            MBProgressHUD.hide(for: self.view, animated: true)
         }
+        refreshControl.endRefreshing()
     }
     
 }

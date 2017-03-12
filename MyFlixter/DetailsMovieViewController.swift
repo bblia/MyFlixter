@@ -24,7 +24,29 @@ class DetailsMovieViewController: UIViewController {
         movieTitle.text = movie.title
         overViewLabel.text = movie.overView
         overViewLabel.sizeToFit()
-        moviePoster.setImageWith(URL(string: Movie.highResURL+movie.moviePosterPath!)!, placeholderImage: lowResImage)
+        
+        
+        let imageRequest = NSURLRequest(url: URL(string: Movie.highResURL+movie.moviePosterPath!)!)
+        moviePoster.setImageWith(
+            imageRequest as URLRequest,
+            placeholderImage: lowResImage,
+            success: { (imageRequest, imageResponse, image) -> Void in
+                
+                // imageResponse will be nil if the image is cached
+                if imageResponse != nil {
+                    self.moviePoster.alpha = 0.0
+                    self.moviePoster.image = image
+                    UIView.animate(withDuration: 0.80, animations: { () -> Void in
+                        self.moviePoster.alpha = 1.0
+                    })
+                } else {
+                    self.moviePoster.image = image
+                }
+        },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+        })
+        
+        
     }
     
 

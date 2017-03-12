@@ -22,7 +22,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //refresh controls
         listrefreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         gridrefreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
 
@@ -33,18 +33,17 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             tableView.insertSubview(listrefreshControl, at: 0)
             myCollectionView.insertSubview(gridrefreshControl, at: 0)
         }
-        
-        
-        
-        
+        //set grid to hidden upon first load.
         if mySegmentControl.selectedSegmentIndex == 0 {
             myCollectionView.isHidden = true
         }
-        
+        //assign datasources and delagates for list and grid views.
         tableView.dataSource = self
         tableView.delegate = self
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
+        
+        //network request.
         MBProgressHUD.showAdded(to: self.view, animated: true)
         Movie.fetchMovies(movieCategory: category, successCallBack: { (movies) in
             self.movies = movies["results"]! as? [NSDictionary] ?? nil
@@ -55,7 +54,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             print(error ?? "error")
         }
     }
-    
+    //list set up.
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         let movie = Movie(movies![indexPath.row])
@@ -65,18 +64,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-    func refreshControlAction(_ refreshControl: UIRefreshControl) {
-        Movie.fetchMovies(movieCategory: category, successCallBack: { (movies) in
-            self.movies = movies["results"]! as? [NSDictionary] ?? nil
-            self.tableView.reloadData()
-            self.myCollectionView.reloadData()
-            refreshControl.endRefreshing()
-        }) { (error) in
-            print(error ?? "error")
-        }
-    }
-    
-    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let nowPlaying = movies {
             return nowPlaying.count
@@ -84,7 +71,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             return 0
         }
     }
-    
+    //grid view set up.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let nowPlaying = movies {
             return nowPlaying.count
@@ -97,19 +84,34 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! MovieCollectionCell
         let movie = Movie(movies![indexPath.row])
         
-        cell.moviePoster.setImageWith(URL(string: "https://image.tmdb.org/t/p/w342"+movie.moviePosterPath!)!)
+        let imageRequest = NSURLRequest(url: NSURL(string: "https://image.tmdb.org/t/p/w342"+movie.moviePosterPath!)! as URL)
+        cell.moviePoster.setImageWith(
+            imageRequest as URLRequest,
+            placeholderImage: nil,
+            success: { (imageRequest, imageResponse, image) -> Void in
+                
+                if imageResponse != nil {
+                    cell.moviePoster.alpha = 0.0
+                    cell.moviePoster.image = image
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                        cell.moviePoster.alpha = 1.0
+                    })
+                } else {
+                    cell.moviePoster.image = image
+                }
+        },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+        })
+        
         
         return cell
     }
-    
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    //segue to detailed view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if sender is MovieCell {
             let cell = sender as! MovieCell
@@ -127,7 +129,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             detailViewController.lowResImage = cell.moviePoster.image
         }
     }
-    
+    //swith between list and grid view.
     @IBAction func displayChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -140,6 +142,16 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             break
         default:
             break
+        }
+    }
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        Movie.fetchMovies(movieCategory: category, successCallBack: { (movies) in
+            self.movies = movies["results"]! as? [NSDictionary] ?? nil
+            self.tableView.reloadData()
+            self.myCollectionView.reloadData()
+            refreshControl.endRefreshing()
+        }) { (error) in
+            print(error ?? "error")
         }
     }
     

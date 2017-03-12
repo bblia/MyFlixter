@@ -26,7 +26,29 @@ class MovieCell: UITableViewCell {
     func setFields(_ movie: Movie){
         titleLabel.text = movie.title
         overViewLabel.text = movie.overView
-        movieImageView.setImageWith(NSURL(string: "https://image.tmdb.org/t/p/w342"+movie.moviePosterPath!) as! URL)
+        
+        let imageRequest = NSURLRequest(url: NSURL(string: "https://image.tmdb.org/t/p/w342"+movie.moviePosterPath!)! as URL)
+        
+        self.movieImageView.setImageWith(
+            imageRequest as URLRequest,
+            placeholderImage: nil,
+            success: { (imageRequest, imageResponse, image) -> Void in
+                
+                if imageResponse != nil {
+                    self.movieImageView.alpha = 0.0
+                    self.movieImageView.image = image
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                        self.movieImageView.alpha = 1.0
+                    })
+                } else {
+                    self.movieImageView.image = image
+                }
+        },
+            failure: { (imageRequest, imageResponse, error) -> Void in
+        })
+        
+        
+        
         overViewLabel.sizeToFit()
     }
 }

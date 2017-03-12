@@ -13,15 +13,29 @@ import MBProgressHUD
 class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource,UICollectionViewDelegate {
     
     @IBOutlet weak var mySegmentControl: UISegmentedControl!
-    
     @IBOutlet weak var myCollectionView: UICollectionView!
-    
     var movies:[NSDictionary]?
     var category:String!
     @IBOutlet weak var tableView: UITableView!
+    var listrefreshControl = UIRefreshControl()
+    var gridrefreshControl = UIRefreshControl()
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        listrefreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        gridrefreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+
+        if #available(iOS 10.0, *){
+            tableView.refreshControl = listrefreshControl
+            myCollectionView.refreshControl = gridrefreshControl
+        }else{
+            tableView.insertSubview(listrefreshControl, at: 0)
+            myCollectionView.insertSubview(gridrefreshControl, at: 0)
+        }
+        
+        
+        
         
         if mySegmentControl.selectedSegmentIndex == 0 {
             myCollectionView.isHidden = true
@@ -50,6 +64,18 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         return cell
     }
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        Movie.fetchMovies(movieCategory: category, successCallBack: { (movies) in
+            self.movies = movies["results"]! as? [NSDictionary] ?? nil
+            self.tableView.reloadData()
+            self.myCollectionView.reloadData()
+            refreshControl.endRefreshing()
+        }) { (error) in
+            print(error ?? "error")
+        }
+    }
+    
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let nowPlaying = movies {

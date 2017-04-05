@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 
 ## Notes
-
+[gif example on twitter: :movie_camera:](https://twitter.com/fraencisco/status/840818935335333889)
 
 ## License
 

@@ -1,8 +1,8 @@
-# Project 1 - *MyFlixter*
+*MyFlixter*
 
 **MyFlixter** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total
+Time spent: **6** hours spent in total
 
 ## User Stories
 
@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 
 ## Notes
-
+[gif example on twitter: :movie_camera:](https://twitter.com/fraencisco/status/840818935335333889)
 
 ## License
 

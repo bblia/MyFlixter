@@ -23,14 +23,12 @@ The following **optional** features are implemented:
 - [x] For the large poster, load the low-res image first, switch to high-res when complete.
 - [x] Customize the highlight and selection effect of the cell.
 - [x] Customize the navigation bar.
-- [ ]
-The following **additional** features are implemented:
 
 
 
 
 ## Notes
-[gif example on twitter: :movie_camera:](https://twitter.com/fraencisco/status/840818935335333889)
+![flixterdemo](https://media.giphy.com/media/26n6Oj1KpPu1JEXni/giphy.gif)
 
 ## License
 

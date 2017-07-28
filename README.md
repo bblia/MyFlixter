@@ -28,7 +28,7 @@ The following **optional** features are implemented:
 
 
 ## Notes
-![flixterdemo](https://media.giphy.com/media/26n6Oj1KpPu1JEXni/giphy.gif)
+![flixterdemo](http://gph.is/2u3fhDc)
 
 ## License
 

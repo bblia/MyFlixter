@@ -28,7 +28,9 @@ The following **optional** features are implemented:
 
 
 ## Notes
-[](https://twitter.com/fraensisco/status/840818935335333889)
+
+[demo on twitter](https://twitter.com/fraensisco/status/840818935335333889)
+
 ## License
 
     Copyright 2017 Francisco M. Delgado
